@@ -1,34 +1,41 @@
 # Pathology-GAN
-PathologyGAN aims to capture key tissue features and uses these characteristics to give structure to its latent space. It uses BigGAN as its baseline architecture to build a latent space of key tissue features. In addition to it, it also incorporates advances from StyleGAN to optimize this latent space in order to identify features of cancerous tissues. The model also replaces Hinge loss with Relativistic Average Discriminator as the GAN objective to enable faster convergence and help capture morphological structure of tissues accurately.
+StyleGAN extends the traditional GAN architecture by incorporating changes to the generator model including the use of a non-linear mapping network that mapped points in latent space to an intermediate latent space. Stochastic variation was introduced through noise added at each point in the generator model that enabled finer interpretation of the style of the generated image. 
 
 ## To train Pathology-GAN
-1. Clone the Pathology-GAN Repository
+1. Clone the StyleGAN Repository
     ```
-    git clone https://github.com/AdalbertoCq/Pathology-GAN.git
+    git clone https://github.com/NVlabs/stylegan.git
     ```
 2. Install the required libraries.
     ```
-    pip install -r requirements.txt
+    pip3 install -r requirements.txt
     ```
-3. Split the input patches into train and test sets.
+3. Create Datasets directory inside StyleGAN
     ```
-    python split_data.py -data <PATCHES_DIR>
+    mkdir -p Datasets    
     ```
-    eg: `python split_data.py -data colon-patches`
-4. Create the dataset directory inside Pathology-GAN
+4. Create histopathologyImages & histopathologyTFRecords directories inside Datasets
     ```
-    mkdir -p Pathology-GAN/dataset/vgh_nki/he/patches_h224_w224
+    mkdir -p  histopathologyImages
+    mkdir -p  histopathologyTFRecords
+
     ```
-5. Create input data for PathologyGAN
+5. Copy your training images to Datasets/histopathologyImages
     ```
-    python createh5.py -train <TRAIN_DIR> -test <TEST_DIR> -out <OUT_DIR>
-    ```
-    eg: `python createh5.py -train colon-patches-train -test colon-patches-test -out Pathology-GAN/dataset/vgh_nki/he/patches_h224_w224`
-6. To train PathologyGAN
-    ```
-    cd Pathology-GAN && python run_pathgan.py --epochs <EPOCHS>
+    cp training/images Datasets/histopathologyImages
     ```
 
+6. Prepare the dataset for training
+    ```
+    python3 dataset_tool.py create_from_images path/to/TFRecords path/to/training/images
+    ```
+    eg: `python3 dataset_tool.py create_from_image Datasets/histopathologyTFRecords Datasets/histopathologyImages `
+7. To train SyleGAN
+   Edit the ```train.py``` to specify the dataset and training configuration
+   ```
+   python3 train.py 
+   ```
+
 ## References
-* [Pathology-GAN](https://openreview.net/pdf?id=CwgSEEQkad)
-* [Pathoglogy-GAN Github Repository](https://github.com/AdalbertoCq/Pathology-GAN)
+* [StyleGAN](https://arxiv.org/abs/1812.04948)
+* [StyleGAN Github Repository](https://github.com/NVlabs/stylegan)
