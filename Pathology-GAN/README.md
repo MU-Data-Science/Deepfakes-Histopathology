@@ -1,5 +1,5 @@
 # Pathology-GAN
-PathologyGAN aims to capture key tissue features and uses these characteristics to give structure to its latent space. It uses BigGAN as its baseline architecture to build a latent space of key tissue features. In addition to it, it also incorporates advances from StyleGAN to optimize this latent space in order to identify features of cancerous tissues. The model also replaces Hinge loss with Relativistic Average Discriminator as the GAN objective to enable faster convergence and help capture morphological structure of tissues accurately.
+PathologyGAN[1] aims to capture key tissue features and uses these characteristics to give structure to its latent space. It uses BigGAN as its baseline architecture to build a latent space of key tissue features. In addition to it, it also incorporates advances from StyleGAN to optimize this latent space in order to identify features of cancerous tissues. The model also replaces Hinge loss with Relativistic Average Discriminator as the GAN objective to enable faster convergence and help capture morphological structure of tissues accurately.
 
 ## To train Pathology-GAN
 1. Clone the Pathology-GAN Repository
@@ -30,5 +30,6 @@ PathologyGAN aims to capture key tissue features and uses these characteristics 
     ```
 
 ## References
+* A. C. Quiros, R. Murray-Smith, and K. Yuan, "PathologyGAN:Learning Deep Representations of Cancer Tissue," arXiv preprintarXiv:1907.02644, 2019.
 * [Pathology-GAN](https://openreview.net/pdf?id=CwgSEEQkad)
 * [Pathoglogy-GAN Github Repository](https://github.com/AdalbertoCq/Pathology-GAN)
